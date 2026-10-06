@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+/* ───────── Design tokens ─────────
+   Editorial discipline (condensed display type, quiet body, generous rhythm)
+   with Samtech's own palette: warm paper, ink bands, indigo for product visuals,
+   volt reserved for primary actions on dark. */
+@theme {
+  --color-paper: #f2efe9;
+  --color-paper-2: #e8e4dc;
+  --color-ink: #0c0d10;
+  --color-ink-2: #17181d;
+  --color-ink-3: #24252c;
+  --color-mute: #6b6963;
+  --color-mute-dark: #9b9a95;
+  --color-indigo: #5b4bff;
+  --color-violet: #a855f7;
+  --color-coral: #ff6a3d;
+  --color-volt: #d4ff3d;
+
+  --font-display: var(--font-big-shoulders), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --gutter: clamp(20px, 4.4vw, 64px);
+  --section: clamp(88px, 11vw, 168px);
+  --line: rgb(12 13 16 / 0.12);
+  --line-dark: rgb(242 239 233 / 0.14);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+::selection {
+  background: var(--color-indigo);
+  color: #fff;
+}
+:focus-visible {
+  outline: 2px solid var(--color-indigo);
+  outline-offset: 3px;
+}
+
+@layer components {
+  /* Layout */
+  .wrap {
+    width: 100%;
+    max-width: 1520px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  .section {
+    padding-block: var(--section);
+  }
+  .band-dark {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    --line: var(--line-dark);
+  }
+
+  /* Type scale — condensed display, quiet body */
+  .t-display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: clamp(64px, 11.2vw, 184px);
+    line-height: 0.84;
+    letter-spacing: -0.01em;
+  }
+  .t-h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: clamp(46px, 6.4vw, 104px);
+    line-height: 0.88;
+    letter-spacing: -0.005em;
+  }
+  .t-h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(28px, 2.6vw, 40px);
+    line-height: 0.95;
+  }
+  .t-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.4;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .t-lead {
+    font-size: clamp(18px, 1.5vw, 22px);
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+  }
+  .t-body {
+    font-size: 16px;
+    line-height: 1.65;
+    max-width: 34rem;
+  }
+  .muted {
+    color: var(--color-mute);
+  }
+  .band-dark .muted {
+    color: var(--color-mute-dark);
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 52px;
+    padding: 0 24px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    white-space: nowrap;
+    transition:
+      background 0.3s var(--ease-expo),
+      color 0.3s var(--ease-expo),
+      border-color 0.3s var(--ease-expo),
+      transform 0.3s var(--ease-expo);
+  }
+  .btn:active {
+    transform: scale(0.98);
+  }
+  .btn-primary {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+  .btn-primary:hover {
+    background: var(--color-indigo);
+  }
+  .btn-volt {
+    background: var(--color-volt);
+    color: var(--color-ink);
+  }
+  .btn-volt:hover {
+    background: #fff;
+  }
+  .btn-ghost {
+    border: 1px solid var(--line);
+  }
+  .btn-ghost:hover {
+    border-color: currentColor;
+  }
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+  }
+
+  /* Pills / chips */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+}
+
+/* Masked line reveal used by headings */
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+.line-mask > span {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
