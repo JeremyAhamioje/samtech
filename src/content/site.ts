@@ -20,7 +20,6 @@ export const contact = {
 export const nav = [
   { label: "Work", href: "#work" },
   { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -73,7 +72,7 @@ export const services: Service[] = [
       label: "Fixed-price packages",
       text: "Launch — one-page site, $700 · Business — up to 5 pages with SEO migration and CRM-wired forms, $1,500 · Growth — everything in Business plus an AI agent, from $2,500.",
     },
-    cta: { label: "Get a free website review", href: "#contact" },
+    cta: { label: "Get a free website review", href: "/review" },
   },
   {
     id: "systems",
@@ -97,7 +96,7 @@ export const services: Service[] = [
       label: "In practice — e-commerce resale",
       text: "Every sale confirmation email is parsed automatically into a live dashboard tracking 10,000+ sales, revenue trends and top venues. No more manual spreadsheets at the end of the month.",
     },
-    cta: { label: "Talk about your workflow", href: "#contact" },
+    cta: { label: "Talk about your workflow", href: "/review" },
   },
   {
     id: "automation",
@@ -126,7 +125,7 @@ export const services: Service[] = [
       label: "In practice — a private school, Lagos",
       text: "The school was losing parent inquiries after hours. Now a WhatsApp assistant answers admissions and fee questions around the clock and hands over to staff the moment a human is needed.",
     },
-    cta: { label: "Add an agent to your site", href: "#contact" },
+    cta: { label: "Add an agent to your site", href: "/review" },
   },
   {
     id: "integrations",
@@ -149,7 +148,7 @@ export const services: Service[] = [
       label: "Under the hood",
       text: "n8n · Claude · OpenAI · custom Python — you never have to touch any of it.",
     },
-    cta: { label: "Map your tools with us", href: "#contact" },
+    cta: { label: "Map your tools with us", href: "/review" },
   },
   {
     id: "growth",
@@ -173,7 +172,7 @@ export const services: Service[] = [
       label: "How it usually goes",
       text: "Plenty of clients start with just the website. When leads arrive faster than they can answer them — or after-hours inquiries start slipping — an agent is added. The site is built ready for it either way.",
     },
-    cta: { label: "Ask about ongoing support", href: "#contact" },
+    cta: { label: "Ask about ongoing support", href: "/review" },
   },
 ];
 
@@ -328,35 +327,6 @@ export const industries = [
   },
 ];
 
-/* ───────────── Process ───────────── */
-
-export const process = [
-  {
-    step: "Discovery",
-    text: "Send your URL or book a 30-minute call. We tell you what's costing you leads — and say so if nothing needs fixing.",
-  },
-  {
-    step: "Strategy",
-    text: "We scope the work and agree a fixed price up front. No hourly meters, no surprise bills.",
-  },
-  {
-    step: "Design",
-    text: "We redesign your homepage for real, on a live link you click through on your phone — before you pay anything.",
-  },
-  {
-    step: "Development",
-    text: "We build, migrate your content and SEO, and test every form before launch.",
-  },
-  {
-    step: "Launch",
-    text: "Go live, with a recorded handover so your team can edit text, photos and listings.",
-  },
-  {
-    step: "Growth",
-    text: "Add an agent, pages or integrations whenever you're ready. The site is built for it.",
-  },
-];
-
 /* ───────────── Why Samtech ───────────── */
 
 export const reasons = [
@@ -426,3 +396,120 @@ export const needOptions = [
   "An AI agent only",
   "Just exploring",
 ];
+
+/* ───────────── Service pages ───────────── */
+
+/**
+ * Long-form copy for each service page: one note per included point (keyed by the
+ * point's text) and one per storyboard step (same order as `storyboard`).
+ * Describes what we do — no invented stats, clients or results.
+ */
+export const serviceDetails: Record<string, { includes: Record<string, string>; steps: string[] }> = {
+  websites: {
+    includes: {
+      "Mobile-first design":
+        "Most of your visitors arrive on a phone. We design for that screen first — buttons within thumb reach, text you can read without zooming, one-tap calling — then scale up to desktop.",
+      "Built for speed":
+        "Optimised images, lean code and fast hosting, so pages load quickly even on a patchy mobile connection. Slow pages lose people before they've read a word.",
+      "SEO kept and improved":
+        "We map every page you already have, redirect old URLs and carry over titles and descriptions, so the rankings you've earned come with you. Then we tidy up the structure Google reads.",
+      "Forms that actually arrive":
+        "Every form is tested before and after launch and delivered to your inbox — and your CRM if you use one — with a fallback if email ever fails.",
+      "Edit it yourself":
+        "Change text, photos and listings yourself without touching code. A recorded handover walks you and your team through it.",
+      "You own everything":
+        "Domain, hosting, code and documentation sit in your name. If we ever part ways, the site keeps running exactly as it is.",
+    },
+    steps: [
+      "We map your pages and decide where each visitor should end up: a call, a booking or a form.",
+      "Your homepage, designed for real on a live link you can click through on your phone — before you pay anything.",
+      "We build the site, move your content across and set up redirects from every old page.",
+      "It goes live on your domain, with every form and link tested.",
+      "The first inquiry lands where your team already works.",
+    ],
+  },
+  systems: {
+    includes: {
+      "Lead forms to email and CRM":
+        "Every inquiry arrives in your inbox and as a record in your CRM, with the details already filled in. Nobody copies anything across.",
+      "Analytics you can actually read":
+        "A plain view of where visitors come from and which pages turn into inquiries, without digging through Google Analytics.",
+      "Orders copied into sheets":
+        "Orders and sales are copied into a spreadsheet as they happen, so there's no retyping at the end of the month.",
+      "Records updated across tools":
+        "Update a customer's details in one place and the change follows them into every tool that stores them.",
+      "Live dashboards":
+        "The numbers you check every week — leads, sales, revenue — on one page that updates itself.",
+    },
+    steps: [
+      "A customer fills in a form, places an order or sends an email.",
+      "The useful details are pulled out and cleaned up: who they are, how to reach them, what they need.",
+      "A record is created or updated in the tool your team already uses.",
+      "Your dashboards and reports reflect it straight away.",
+    ],
+  },
+  automation: {
+    includes: {
+      "Never miss a lead":
+        "Inquiries get an answer in minutes, evenings and weekends included, so they don't drift to whoever replies first.",
+      "Follow-ups that send themselves":
+        "Leads that go quiet get a polite nudge at the right moment, written in your voice.",
+      "Invoice reminders":
+        "Friendly reminders before and after a due date, so you're not chasing payments by hand.",
+      "WhatsApp, email or SMS":
+        "The assistant works in the channels your customers already use, rather than asking them to learn a new one.",
+      "Hands over to a human when needed":
+        "When a question needs a person, the conversation passes to your team with the full context attached.",
+    },
+    steps: [
+      "A customer gets in touch outside working hours.",
+      "The assistant answers using your own information: prices, availability, policies.",
+      "It asks the questions you would ask and works out who is ready to go ahead.",
+      "By morning your team has a summary and a clear next step, not a cold message.",
+    ],
+  },
+  integrations: {
+    includes: {
+      "Website → WhatsApp → CRM":
+        "One form on your site can start a WhatsApp conversation and create a CRM contact in a single flow.",
+      "Leads synced to your CRM or sheet":
+        "New leads appear in your CRM or a shared sheet automatically, wherever they came from.",
+      "Invoices and notifications":
+        "When a deal or booking is confirmed, the invoice goes out and the right people are told.",
+      "Deployed in your accounts":
+        "Everything runs in accounts you own, so no middleman ever sits between you and your data.",
+      "Documented and handed over":
+        "Plain-English documentation of what's connected and how, so nothing becomes a black box.",
+    },
+    steps: [
+      "A visitor fills in a form on your website.",
+      "They get a reply on WhatsApp straight away.",
+      "Their details are added to your CRM.",
+      "When they say yes, the invoice goes out.",
+      "Your team is notified at each step that matters.",
+    ],
+  },
+  growth: {
+    includes: {
+      "Add an agent any time":
+        "The site is built ready for an AI agent, so adding one later never means starting again.",
+      "New pages and features":
+        "New services, landing pages or features, each scoped and priced when you need it.",
+      "Optional care plan":
+        "If you'd rather not handle updates, a small care plan keeps the site maintained. It's optional and you can stop any time.",
+      "Recorded handover for your team":
+        "A recorded walkthrough so new staff can learn to update the site without having to ask us.",
+      "No retainers, no lock-in":
+        "Work is priced per project. You own everything and can part ways whenever you like.",
+    },
+    steps: [
+      "Your site goes live with everything tested.",
+      "We look at where inquiries come from and where they get stuck.",
+      "You add what the business needs next: an agent, new pages or an integration.",
+      "Each addition is scoped and priced on its own, so you only pay for what earns its place.",
+    ],
+  },
+};
+
+export const servicePath = (s: Service) => `/services/${s.id}`;
+export const findService = (id: string) => services.find((s) => s.id === id);

@@ -16,6 +16,9 @@
   --color-violet: #a855f7;
   --color-coral: #ff6a3d;
   --color-volt: #d4ff3d;
+  --color-flame: #ff5100;
+  --color-cream: #f5efe6;
+  --color-cobalt: #1406e6;
 
   --font-display: var(--font-big-shoulders), "Arial Narrow", sans-serif;
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
@@ -178,6 +181,28 @@ body {
     font-size: 13px;
     white-space: nowrap;
   }
+}
+
+/* Directional fade: a soft gradient edge sweeps left → right across the text.
+   GSAP animates --reveal from -30% to 130%. */
+@property --reveal {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 130%;
+}
+.dir-fade {
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(var(--reveal) - 30%), transparent var(--reveal));
+  mask-image: linear-gradient(90deg, #000 calc(var(--reveal) - 30%), transparent var(--reveal));
+}
+
+/* Hero shape: slow constant spin */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin-slow {
+  animation: spin-slow 14s linear infinite;
 }
 
 /* Masked line reveal used by headings */

@@ -1,54 +1,71 @@
-import { ArrowRight, Check } from "lucide-react";
-import type { Service } from "@/content/site";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { servicePath, type Service } from "@/content/site";
 import ServiceVisual from "@/components/ServiceVisual";
 import { Lines } from "@/components/ui";
 
 /**
- * One service = one story = one visual. Readable on its own:
- * number → title → one sentence → short explanation → what's included →
- * a real example → next step. Alternates sides for rhythm.
+ * One service, one story, one animation. Number + kicker → big title → one sentence →
+ * short explanation → what's included as chips → a real example → next step.
+ * Alternates sides for rhythm.
  */
 export default function ServiceSection({ service, reverse = false }: { service: Service; reverse?: boolean }) {
   return (
-    <section id={service.id} aria-labelledby={`${service.id}-title`} className="scroll-mt-20 border-t border-[var(--line)] py-[clamp(72px,9vw,136px)]">
-      <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-10">
-        <div className={`lg:col-span-5 ${reverse ? "lg:order-2 lg:col-start-8" : ""}`}>
-          <div className="flex items-center gap-4">
-            <span className="font-display text-[64px] font-extrabold leading-none text-indigo md:text-[88px]">{service.number}</span>
-            <span className="t-label muted max-w-[8rem]">{service.kicker}</span>
-          </div>
+    <section
+      id={service.id}
+      aria-labelledby={`${service.id}-title`}
+      className="scroll-mt-20 border-t border-[var(--line)] py-[clamp(72px,9vw,136px)]"
+    >
+      <div className="wrap grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
+        <div className={`min-w-0 lg:col-span-5 ${reverse ? "lg:order-2" : ""}`}>
+          <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[15px] font-medium text-ink/60">
+            <span className="font-display text-[22px] font-extrabold text-flame">{service.number}</span>
+            {service.kicker}
+          </p>
 
-          <Lines as="h3" id={`${service.id}-title`} lines={[service.title]} className="t-h2 mt-6" />
+          <Lines
+            as="h3"
+            id={`${service.id}-title`}
+            lines={[service.title]}
+            className="mt-4 font-display text-[clamp(48px,5.4vw,92px)] font-extrabold uppercase leading-[0.88]"
+          />
 
-          <p className="t-lead mt-6 max-w-[30rem]" data-reveal>
+          <p className="mt-6 max-w-[30rem] text-[clamp(18px,1.4vw,21px)] font-medium leading-snug" data-reveal>
             {service.summary}
           </p>
-          <p className="t-body muted mt-5" data-reveal>
+          <p className="mt-4 max-w-[32rem] text-[16px] leading-relaxed text-ink/65" data-reveal>
             {service.body}
           </p>
 
-          <ul className="mt-8 grid gap-x-6 gap-y-2.5 sm:grid-cols-2" data-reveal-stagger>
+          <ul className="mt-7 flex flex-wrap gap-2.5" data-reveal-stagger>
             {service.includes.map((item) => (
-              <li key={item} className="flex items-start gap-2.5 text-[15px]">
-                <Check size={16} className="mt-1 shrink-0 text-indigo" aria-hidden />
+              <li key={item} className="rounded-full border border-ink/80 px-4 py-2 text-[15px] leading-tight">
                 {item}
               </li>
             ))}
           </ul>
 
-          <a href={service.cta.href} className="link-arrow mt-10">
-            {service.cta.label} <ArrowRight size={15} aria-hidden />
-          </a>
+          <div className="mt-8 max-w-[32rem]" data-reveal>
+            <span className="mb-3 block h-[3px] w-8 rounded-full bg-flame" aria-hidden />
+            <p className="text-[13px] font-semibold uppercase tracking-[0.12em] text-ink/50">{service.example.label}</p>
+            <p className="mt-2 text-[15px] leading-relaxed">{service.example.text}</p>
+          </div>
+
+          <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <Link
+              href={service.cta.href}
+              className="inline-flex h-14 items-center gap-3 rounded-full bg-ink px-7 text-[16px] font-semibold text-cream transition-colors duration-300 hover:bg-flame"
+            >
+              {service.cta.label} <ArrowUpRight size={18} aria-hidden />
+            </Link>
+            <Link href={servicePath(service)} className="text-[15px] font-semibold underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+              More about {service.title}
+            </Link>
+          </div>
         </div>
 
-        <div className={`lg:col-span-7 ${reverse ? "lg:order-1" : "lg:col-start-6"} lg:pl-6`}>
-          <div data-reveal>
-            <ServiceVisual service={service} />
-          </div>
-          <aside className="mt-5 rounded-[20px] bg-paper-2 p-6 md:p-7" data-reveal>
-            <p className="t-label text-indigo">{service.example.label}</p>
-            <p className="mt-3 text-[15px] leading-relaxed">{service.example.text}</p>
-          </aside>
+        <div className={`min-w-0 lg:col-span-7 ${reverse ? "lg:order-1" : ""}`} data-reveal>
+          <ServiceVisual service={service} />
         </div>
       </div>
     </section>

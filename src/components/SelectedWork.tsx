@@ -1,81 +1,65 @@
-import { ArrowUpRight, Bot, LayoutDashboard, Search } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { automationWork, featuredWork } from "@/content/site";
 import CaseStudyCard from "@/components/CaseStudyCard";
-import { Lines, SectionLabel } from "@/components/ui";
+import { Lines, Pinwheel } from "@/components/ui";
 
-const automationIcons = [Bot, LayoutDashboard, Search];
-
-/** 04 — evidence before claims: real builds, shown large, early in the page. */
+/** Real builds on the hero-button blue: each site on a laptop, then the automation work. */
 export default function SelectedWork() {
   return (
-    <section id="work" className="band-dark section">
+    <section id="work" className="section scroll-mt-16 bg-cobalt text-cream">
       <div className="wrap">
-        <div className="flex flex-wrap items-end justify-between gap-8">
-          <div>
-            <SectionLabel index="02" className="muted mb-8">
-              Selected work
-            </SectionLabel>
-            <Lines lines={["Real builds.", "Judge for yourself."]} className="t-h2" />
-          </div>
-          <p className="t-body muted max-w-[22rem]" data-reveal>
-            Websites we&apos;ve designed and built, and the automation behind the scenes. Click through — they&apos;re live.
+        <p className="flex items-center gap-2.5 font-display text-[clamp(26px,2.2vw,34px)] font-extrabold uppercase leading-none">
+          <Pinwheel className="spin-slow size-[1em] text-flame" hubClassName="fill-cobalt" />
+          Work
+        </p>
+        <div className="mt-[clamp(32px,4vw,56px)] flex flex-wrap items-end justify-between gap-8">
+          <Lines lines={["Real builds.", "Judge for yourself."]} className="t-display !text-[clamp(56px,8.4vw,140px)]" />
+          <p className="max-w-[22rem] text-[17px] leading-snug text-cream/80" data-reveal>
+            Websites we&apos;ve designed and built. Hover a screen to scroll it, or click through — they&apos;re live.
           </p>
         </div>
 
-        <div className="mt-16 space-y-24 md:mt-24 md:space-y-32">
+        <div className="mt-20 space-y-28 md:mt-28 md:space-y-36">
           {featuredWork.map((study, i) => (
             <CaseStudyCard key={study.id} study={study} index={i + 1} reverse={i % 2 === 1} />
           ))}
         </div>
 
         {/* Automation work */}
-        <div className="mt-24 border-t border-[var(--line)] pt-14 md:mt-32">
+        <div className="mt-28 border-t border-cream/25 pt-14 md:mt-36">
           <div className="flex flex-wrap items-baseline justify-between gap-4">
-            <h3 className="t-h3">Automation work</h3>
-            <p className="t-label muted">Client names withheld by agreement</p>
+            <h3 className="font-display text-[clamp(36px,3.6vw,60px)] font-extrabold uppercase leading-none">Automation work</h3>
+            <p className="text-[14px] font-medium text-cream/60">Client names withheld by agreement</p>
           </div>
           <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4" data-reveal-stagger>
-            {automationWork.map((c, i) => {
-              const Icon = automationIcons[i];
-              return (
-                <article key={c.title} className="flex flex-col rounded-[20px] bg-ink-2 p-7 ring-1 ring-white/5">
-                  <Icon className="text-indigo" size={22} aria-hidden />
-                  <p className="t-label muted mt-6">{c.sector}</p>
-                  <h4 className="mt-2 text-[20px] font-semibold leading-tight tracking-tight">{c.title}</h4>
-                  <dl className="mt-6 space-y-3 text-[14px] leading-relaxed">
-                    <div>
-                      <dt className="sr-only">Problem</dt>
-                      <dd className="text-paper/55">{c.problem}</dd>
-                    </div>
-                    <div>
-                      <dt className="sr-only">What changed</dt>
-                      <dd className="text-paper/85">{c.change}</dd>
-                    </div>
-                    <div>
-                      <dt className="sr-only">Result</dt>
-                      <dd className="text-volt">{c.result}</dd>
-                    </div>
-                  </dl>
-                </article>
-              );
-            })}
-            <a
-              href="#contact"
-              className="group flex flex-col justify-between rounded-[20px] border border-dashed border-white/20 p-7 transition-colors hover:border-volt"
-            >
-              <p className="t-label muted">Next</p>
-              <div>
-                <p className="t-h3">Your business could be the next one here.</p>
-                <p className="mt-3 text-[14px] text-paper/60">
-                  Every free review comes with a homepage concept of your own site, on a live link.
+            {automationWork.map((c) => (
+              <article key={c.title} className="flex flex-col rounded-[24px] border border-cream/25 p-7">
+                <p className="text-[13px] font-semibold uppercase tracking-[0.12em] text-cream/60">{c.sector}</p>
+                <h4 className="mt-3 text-[21px] font-semibold leading-tight tracking-tight">{c.title}</h4>
+                <p className="mt-5 text-[15px] leading-relaxed text-cream/75">{c.change}</p>
+                <p className="mt-auto pt-6 text-[15px] font-semibold leading-snug">
+                  <span className="mb-2 block h-[3px] w-8 rounded-full bg-flame" aria-hidden />
+                  {c.result}
                 </p>
-                <span className="link-arrow mt-6 text-volt">
-                  Request my concept <ArrowUpRight size={15} aria-hidden />
+              </article>
+            ))}
+            <Link
+              href="/review"
+              className="group flex flex-col justify-between gap-10 rounded-[24px] bg-flame p-7 transition-colors duration-300 hover:bg-cream hover:text-cobalt"
+            >
+              <p className="text-[13px] font-semibold uppercase tracking-[0.12em] opacity-75">Next</p>
+              <div>
+                <p className="font-display text-[clamp(30px,2.4vw,40px)] font-extrabold uppercase leading-[0.92]">
+                  Your business could be the next one here.
+                </p>
+                <span className="mt-6 inline-flex items-center gap-2 text-[15px] font-semibold">
+                  Get a free website review
+                  <ArrowUpRight size={17} aria-hidden className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </span>
               </div>
-            </a>
+            </Link>
           </div>
-          <p className="muted mt-6 text-[14px]">Happy to walk through any of these on a call.</p>
         </div>
       </div>
     </section>
